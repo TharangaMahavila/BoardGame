@@ -1,5 +1,5 @@
 from database.db_init import init_database
-from database.db_connection import get_connection
+from database.db_connection import get_connection, close_connection
 
 
 def main():
@@ -12,8 +12,10 @@ def main():
     print("Users count:", cursor.fetchone()[0])
 
     cursor.close()
-    conn.close()
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        close_connection()
