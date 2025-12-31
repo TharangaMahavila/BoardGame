@@ -1,17 +1,11 @@
 from database.db_init import init_database
-from database.db_connection import get_connection, close_connection
+from database.db_connection import close_connection, fetchone
 
 
 def main():
     init_database()
 
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT COUNT(*) FROM users")
-    print("Users count:", cursor.fetchone()[0])
-
-    cursor.close()
+    print(fetchone("SELECT COUNT(*) FROM users"))
 
 
 if __name__ == "__main__":
