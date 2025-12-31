@@ -34,11 +34,11 @@ def init_database():
                 user_id INT AUTO_INCREMENT PRIMARY KEY,
                 first_name VARCHAR(50) NOT NULL,
                 last_name VARCHAR(50) NOT NULL,
-                street VARCHAR(80) NOT NULL,
-                city VARCHAR(40) NOT NULL,
-                postal_code VARCHAR(10) NOT NULL,
-                phone_no VARCHAR(20) NOT NULL,
-                email VARCHAR(80) UNIQUE,
+                street VARCHAR(80),
+                city VARCHAR(40),
+                postal_code VARCHAR(10),
+                phone_no VARCHAR(20),
+                email VARCHAR(80) UNIQUE NOT NULL,
                 pwd_hash VARCHAR(200) NOT NULL
             )
         """)

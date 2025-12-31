@@ -70,7 +70,7 @@ class LoginController:
                 phone = input("Enter Phone (optional):")
                 email = input("Enter Email address:")
                 password = input("Enter Password:")
-                print(self.login_service.member_registration(
+                new_member = self.login_service.member_registration(
                     first_name,
                     last_name,
                     street,
@@ -79,7 +79,10 @@ class LoginController:
                     phone,
                     email,
                     password
-                ))
+                )
+                if new_member:
+                    print("\nRegistration successful, Please login from main menu")
+                    break
             except Exception as e:
                 attempts += 1
                 print(f"\nFailed to register member: {e}\n")
