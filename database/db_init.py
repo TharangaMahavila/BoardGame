@@ -82,7 +82,5 @@ def init_database():
         cursor.close()
         conn.close()
 
-        print("Database and tables ready")
-
     except Error as e:
         print("Database initialization error:", e)
