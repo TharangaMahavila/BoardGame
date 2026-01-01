@@ -1,4 +1,5 @@
 import sys
+import getpass
 import src.main.service.login_service as login
 
 
@@ -59,7 +60,7 @@ class LoginController:
                 print("== Welcome to the Online Boardgame Shop ==")
                 print("== User Login ==")
                 email = input("Enter Email:")
-                password = input("Enter Password:")
+                password = getpass.getpass("Enter Password:")
                 user = self.login_service.user_login(email, password)
                 if user:
                     print("Login Successful.")
