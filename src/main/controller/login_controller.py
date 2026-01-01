@@ -4,7 +4,6 @@ import src.main.service.login_service as login
 
 class LoginController:
     def __init__(self):
-        self.user = None
         self.login_service = login.LoginService()
 
     def display_main_menu(self):
@@ -51,7 +50,27 @@ class LoginController:
                 self._exit()
 
     def _user_login(self):
-        print()
+        attempts = 0
+        while True:
+            if attempts == 5:
+                print("Five invalid attempts. Come back again later!")
+                break
+            try:
+                print("== Welcome to the Online Boardgame Shop ==")
+                print("== User Login ==")
+                email = input("Enter Email:")
+                password = input("Enter Password:")
+                user = self.login_service.user_login(email, password)
+                if user:
+                    print("Login Successful.")
+                    break
+            except Exception as e:
+                attempts += 1
+                print(f"\nFailed to login: {e}\n")
+                choice = input("Would you like to re-enter (y/n):")
+                if choice.lower() == "n":
+                    self._exit()
+                    break
 
     def _member_registration(self):
         attempts = 0
