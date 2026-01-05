@@ -1,11 +1,12 @@
 from database.db_init import init_database
-from database.db_connection import close_connection, fetchone
+from database.db_connection import close_connection
+import src.main.controller.login_controller as login_controller
 
 
 def main():
     init_database()
-
-    print(fetchone("SELECT COUNT(*) FROM users"))
+    login = login_controller.LoginController()
+    login.display_main_menu()
 
 
 if __name__ == "__main__":
