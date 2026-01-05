@@ -1,13 +1,16 @@
-import sys
 import getpass
-import src.main.service.login_service as login
+from src.main.service.login_service import LoginService
+from src.main.repository.login_repository import LoginRepository
+from src.main.util.route import Route
 
 
 class LoginController:
-    def __init__(self):
-        self.login_service = login.LoginService()
+    def __init__(self, context=None):
+        self.context = context
+        self.login_repo = LoginRepository()
+        self.login_service = LoginService(self.context, self.login_repo)
 
-    def display_main_menu(self):
+    def start(self):
         menu_options = {
             "1": "User Login",
             "2": "New Member Registration",
@@ -15,7 +18,7 @@ class LoginController:
             }
 
         attempts = 0
-        while True:
+        while not self.context.user:
             if attempts == 5:
                 print("Five invalid attempts. Come back again later!")
                 break
@@ -32,9 +35,7 @@ class LoginController:
                 choice = input("Type in your choice:")
                 print()
                 if choice in menu_options.keys():
-                    self._select_menu(choice)
-                    if choice == "q":
-                        break
+                    return self._select_menu(choice)
                 else:
                     raise ValueError()
             except ValueError:
@@ -44,11 +45,11 @@ class LoginController:
     def _select_menu(self, menu_id):
         match menu_id:
             case "1":
-                self._user_login()
+                return self._user_login()
             case "2":
                 self._member_registration()
             case "q":
-                self._exit()
+                return self._exit()
 
     def _user_login(self):
         attempts = 0
@@ -64,7 +65,8 @@ class LoginController:
                 user = self.login_service.user_login(email, password)
                 if user:
                     print("Login Successful.")
-                    break
+                    self.context.user = user
+                    return Route.MEMBER_MENU
             except Exception as e:
                 attempts += 1
                 print(f"\nFailed to login: {e}\n")
@@ -112,5 +114,4 @@ class LoginController:
                     break
 
     def _exit(self):
-        print("Thank you for using Boardgame Shop!")
-        sys.exit(0)
+        return Route.EXIT

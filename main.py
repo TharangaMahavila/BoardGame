@@ -1,12 +1,12 @@
 from database.db_init import init_database
 from database.db_connection import close_connection
-import src.main.controller.login_controller as login_controller
+from src.main.controller.router_controller import RouterController
 
 
 def main():
     init_database()
-    login = login_controller.LoginController()
-    login.display_main_menu()
+    router = RouterController()
+    router.start()
 
 
 if __name__ == "__main__":
