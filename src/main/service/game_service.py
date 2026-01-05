@@ -14,10 +14,28 @@ class GameService:
         result = self.gameRepo.get_genre_count(genre)
         return result[0]
 
+    def get_designer_count(self, name):
+        result = self.gameRepo.get_designer_count(name)
+        return result[0]
+
+    def get_title_count(self, name):
+        result = self.gameRepo.get_title_count(name)
+        return result[0]
+
     def get_game_by_genre(self, genre, page, page_size=2):
         offset = page * page_size
-        result = self.gameRepo.find_paginated(genre, page_size, offset)
+        result = self.gameRepo.find_paginated_by_genre(genre, page_size, offset)
         return result
-    
+
+    def get_game_by_designer(self, name, page, page_size=2):
+        offset = page * page_size
+        result = self.gameRepo.find_paginated_by_designer(name, page_size, offset)
+        return result
+
+    def get_game_by_title(self, name, page, page_size=2):
+        offset = page * page_size
+        result = self.gameRepo.find_paginated_by_title(name, page_size, offset)
+        return result
+
     def get_game_by_id(self, id):
         return self.gameRepo.find_by_id(id)

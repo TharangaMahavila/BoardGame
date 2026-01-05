@@ -3,6 +3,7 @@ from src.main.context.app_context import AppContext
 from src.main.controller.login_controller import LoginController
 from src.main.controller.member_menu_controller import MemberMenu
 from src.main.controller.genre_controller import GenreController
+from src.main.controller.designer_controller import DesignerController
 from src.main.util.route import Route
 
 
@@ -13,6 +14,7 @@ class RouterController:
             Route.LOGIN: LoginController(self.context),
             Route.MEMBER_MENU: MemberMenu(self.context),
             Route.GENRE: GenreController(self.context),
+            Route.DESIGNER: DesignerController(self.context),
         }
 
     def start(self):
