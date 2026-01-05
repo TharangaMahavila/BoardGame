@@ -1,7 +1,7 @@
 from database.db_connection import get_connection
 
 
-class LoginRepository:
+class UserRepository:
 
     def save_member(self, member):
         conn = get_connection()

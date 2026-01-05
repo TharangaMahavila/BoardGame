@@ -56,7 +56,6 @@ class MemberMenu:
     def _browse_by_genre(self):
         return Route.GENRE
 
-
     def _search_by_designer(self):
         print("designer")
 

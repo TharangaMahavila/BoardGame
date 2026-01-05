@@ -4,9 +4,9 @@ from src.main.models.member import Member
 
 
 class LoginService:
-    def __init__(self, context=None, login_repo=None):
+    def __init__(self, context=None, user_repo=None):
         self.context = context
-        self.loginRepo = login_repo
+        self.userRepo = user_repo
 
     def member_registration(self, fname, lname, street, city, postal, phone, email, password):
         try:
@@ -39,7 +39,7 @@ class LoginService:
                 hash_password
             )
 
-            return self.loginRepo.save_member(member)
+            return self.userRepo.save_member(member)
         except Exception as e:
             raise e
 
@@ -47,16 +47,17 @@ class LoginService:
         if not (email.strip() and password):
             raise ValueError("Email/Password required")
         validate_email(email)
-        member = self.loginRepo.get_member_by_email(email)
+        member = self.userRepo.get_member_by_email(email)
         if not member:
             raise ValueError("Email address does not exist")
         if not bcrypt.checkpw(password.encode("utf-8"),
                               member["pwd_hash"].encode("utf-8")):
             raise ValueError("Invalid credentials")
         member.pop("pwd_hash", None)
+        print(member)
         return member
 
     def check_email_already_in_use(self, email):
-        member = self.loginRepo.get_member_by_email(email)
+        member = self.userRepo.get_member_by_email(email)
         if member:
             raise ValueError("Email address is already in use. Please login")
