@@ -45,11 +45,11 @@ class MemberMenu:
             case "1":
                 return self._browse_by_genre()
             case "2":
-                self._search_by_designer()
+                return self._search_by_designer()
             case "3":
-                self._view_cart()
+                return self._view_cart()
             case "4":
-                self._checkout()
+                return self._checkout()
             case "5":
                 return self._logout()
 
@@ -57,7 +57,7 @@ class MemberMenu:
         return Route.GENRE
 
     def _search_by_designer(self):
-        print("designer")
+        return Route.DESIGNER
 
     def _view_cart(self):
         print("cart")
