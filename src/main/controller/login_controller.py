@@ -1,14 +1,14 @@
 import getpass
 from src.main.service.login_service import LoginService
-from src.main.repository.login_repository import LoginRepository
+from src.main.repository.user_repository import UserRepository
 from src.main.util.route import Route
 
 
 class LoginController:
     def __init__(self, context=None):
         self.context = context
-        self.login_repo = LoginRepository()
-        self.login_service = LoginService(self.context, self.login_repo)
+        self.user_repo = UserRepository()
+        self.login_service = LoginService(self.context, self.user_repo)
 
     def start(self):
         menu_options = {

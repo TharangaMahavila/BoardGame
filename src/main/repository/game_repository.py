@@ -1,7 +1,7 @@
 from database.db_connection import get_connection
 
 
-class GenreRepository:
+class GameRepository:
 
     def get_all_genre(self):
         conn = get_connection()
@@ -35,3 +35,14 @@ class GenreRepository:
         with conn.cursor(dictionary=True) as cursor:
             cursor.execute(sql, (genre, limit, offset))
             return cursor.fetchall()
+
+    def find_by_id(self, id):
+        conn = get_connection()
+
+        sql = """
+            SELECT * FROM games WHERE game_id = %s;
+        """
+
+        with conn.cursor(dictionary=True) as cursor:
+            cursor.execute(sql, (id,))
+            return cursor.fetchone()
