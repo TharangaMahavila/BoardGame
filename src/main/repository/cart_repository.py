@@ -62,3 +62,16 @@ class CartRepository:
             )
             conn.commit()
             return cursor.rowcount
+
+    def get_by_user_id(self, user_id):
+        conn = get_connection()
+
+        sql = """
+            SELECT c.game_id, g.title, g.unit_price, c.quantity FROM cart c
+            JOIN games g ON g.game_id = c.game_id
+            WHERE c.user_id = %s;
+        """
+
+        with conn.cursor(dictionary=True) as cursor:
+            cursor.execute(sql, (user_id,))
+            return cursor.fetchall()

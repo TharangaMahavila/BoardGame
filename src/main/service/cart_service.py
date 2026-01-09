@@ -19,3 +19,6 @@ class CartService:
             result = self.cartRepo.save_item(self.context.user["user_id"], game_id, qty)
             if result == 1:
                 return "Added to cart"
+
+    def get_all_cart_items(self):
+        return self.cartRepo.get_by_user_id(self.context.user["user_id"])

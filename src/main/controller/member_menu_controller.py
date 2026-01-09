@@ -60,10 +60,10 @@ class MemberMenu:
         return Route.DESIGNER
 
     def _view_cart(self):
-        print("cart")
+        return Route.CART
 
     def _checkout(self):
-        print("checkout")
+        return Route.INVOICE
 
     def _logout(self):
         self.context.user = None

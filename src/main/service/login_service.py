@@ -54,7 +54,6 @@ class LoginService:
                               member["pwd_hash"].encode("utf-8")):
             raise ValueError("Invalid credentials")
         member.pop("pwd_hash", None)
-        print(member)
         return member
 
     def check_email_already_in_use(self, email):
