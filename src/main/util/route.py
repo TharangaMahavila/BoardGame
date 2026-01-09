@@ -6,4 +6,6 @@ class Route(Enum):
     MEMBER_MENU = "member_menu"
     GENRE = "genre"
     DESIGNER = "designer"
+    CART = "cart"
+    INVOICE = "invoice"
     EXIT = "exit"

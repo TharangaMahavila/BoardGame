@@ -4,6 +4,8 @@ from src.main.controller.login_controller import LoginController
 from src.main.controller.member_menu_controller import MemberMenu
 from src.main.controller.genre_controller import GenreController
 from src.main.controller.designer_controller import DesignerController
+from src.main.controller.cart_controller import CartController
+from src.main.controller.invoice_controller import InvoiceController
 from src.main.util.route import Route
 
 
@@ -15,6 +17,8 @@ class RouterController:
             Route.MEMBER_MENU: MemberMenu(self.context),
             Route.GENRE: GenreController(self.context),
             Route.DESIGNER: DesignerController(self.context),
+            Route.CART: CartController(self.context),
+            Route.INVOICE: InvoiceController(self.context),
         }
 
     def start(self):
