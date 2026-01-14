@@ -41,3 +41,4 @@ class CartController:
                 return Route.MEMBER_MENU
         else:
             print("Cart is empty.")
+            return Route.MEMBER_MENU

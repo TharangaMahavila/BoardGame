@@ -29,6 +29,7 @@ class LoginService:
                 ).decode("utf-8")
 
             member = Member(
+                "",
                 fname,
                 lname,
                 street,

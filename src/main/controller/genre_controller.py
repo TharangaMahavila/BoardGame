@@ -55,7 +55,8 @@ class GenreController:
                 print(f"== {genre} (showing {start+1}-{start+page_size} of {total})")
                 if not result:
                     print("No more games.")
-                    page -= 1
+                    if page > 0:
+                        page -= 1
                 for item in result:
                     print(f"- ID {item["game_id"]}: {item["title"]} by {item["designer"]} ${item["unit_price"]}")
                 print("Options: enter Game ID to add to cart, 'n' for next, ENTER to return")
