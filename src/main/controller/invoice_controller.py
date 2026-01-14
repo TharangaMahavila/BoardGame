@@ -38,3 +38,4 @@ class InvoiceController:
                 return Route.MEMBER_MENU
         else:
             print("No order found.")
+            return Route.MEMBER_MENU
