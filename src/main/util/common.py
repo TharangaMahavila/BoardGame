@@ -6,5 +6,7 @@ EMAIL_REGEX = re.compile(
 
 
 def validate_email(email: str):
+    # Checks whether the given email matches the EMAIL_REGEX pattern
+    # If it does not match, an exception is raised to indicate invalid format
     if not EMAIL_REGEX.match(email):
         raise ValueError("Invalid email format")

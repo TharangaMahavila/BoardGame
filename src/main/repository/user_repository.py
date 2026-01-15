@@ -6,6 +6,7 @@ class UserRepository:
     def save_member(self, member):
         conn = get_connection()
 
+        # SQL query to insert a new user/member
         sql = """
             INSERT INTO users (
             first_name,
@@ -35,15 +36,18 @@ class UserRepository:
                 )
             )
             conn.commit()
+            # Return the new user's ID
             return cursor.lastrowid
 
     def get_member_by_email(self, email):
         conn = get_connection()
 
+        # SQL query to get user by email
         sql = """
             SELECT * FROM users WHERE email = %s
         """
 
         with conn.cursor(dictionary=True) as cursor:
             cursor.execute(sql, (email,))
+            # Return the user record if exists
             return cursor.fetchone()

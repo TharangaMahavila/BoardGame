@@ -31,6 +31,7 @@ class OrderRepository:
             """, (user["user_id"],))
 
             conn.commit()
+            # Return the created order ID
             return order_id
         except Exception:
             conn.rollback()
@@ -39,6 +40,7 @@ class OrderRepository:
     def get_order_by_user_id(self, user_id):
         conn = get_connection()
 
+        # SQL query to get the most recent order for a user
         sql = """
             SELECT o.order_no, u.first_name, u.last_name, o.ship_street, o.ship_city, o.ship_postal_code, o.created FROM orders o
             JOIN users u ON u.user_id = o.user_id
@@ -48,11 +50,13 @@ class OrderRepository:
 
         with conn.cursor(dictionary=True) as cursor:
             cursor.execute(sql, (user_id,))
+            # Return single order record
             return cursor.fetchone()
 
     def get_order_items_by_order_id(self, order_id):
         conn = get_connection()
 
+        # SQL query to get all items for a specific order
         sql = """
             SELECT oi.game_id, g.title, g.unit_price, oi.quantity, oi.line_total from order_items oi
             JOIN games g ON g.game_id = oi.game_id
@@ -61,4 +65,5 @@ class OrderRepository:
 
         with conn.cursor(dictionary=True) as cursor:
             cursor.execute(sql, (order_id,))
+            # Return list of order items
             return cursor.fetchall()

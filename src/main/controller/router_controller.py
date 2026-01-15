@@ -11,7 +11,9 @@ from src.main.util.route import Route
 
 class RouterController:
     def __init__(self):
+        # Create a shared application context
         self.context = AppContext()
+        # Map each route to its corresponding controller
         self.controllers = {
             Route.LOGIN: LoginController(self.context),
             Route.MEMBER_MENU: MemberMenu(self.context),
@@ -22,13 +24,17 @@ class RouterController:
         }
 
     def start(self):
+        # Start the application at the login screen
         route = Route.LOGIN
 
-        while route != Route.EXIT:
+        while route != Route.EXIT:  # Continue until EXIT route is returned
+            # Get the controller for the current route
             controller = self.controllers[route]
+            # Run the controller and get the next route
             direction = controller.start()
             if direction:
+                # Update route if a new one is returned
                 route = direction
 
         print("Thank you for using Boardgame Shop!")
-        sys.exit(0)
+        sys.exit(0)  # Exit the program

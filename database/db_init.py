@@ -15,7 +15,7 @@ def init_database():
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG['database']}")
         cursor.execute(f"USE {DB_CONFIG['database']}")
 
-        # Create tables if not exist
+        # Create games tables if not exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS games (
                 game_id CHAR(8) PRIMARY KEY,
@@ -29,6 +29,7 @@ def init_database():
             )
         """)
 
+        # Create users tables if not exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,6 +44,7 @@ def init_database():
             )
         """)
 
+        # Create orders tables if not exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS orders (
                 order_no INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,6 +57,7 @@ def init_database():
             )
         """)
 
+        # Create order_items tables if not exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS order_items (
                 order_no INT NOT NULL,
@@ -67,6 +70,7 @@ def init_database():
             )
         """)
 
+        # Create cart tables if not exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS cart (
                 user_id INT NOT NULL,
