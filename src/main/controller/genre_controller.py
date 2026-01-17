@@ -49,8 +49,10 @@ class GenreController:
     def _select_genre(self, genre):
         page = 0    # Current page number
         page_size = 2   # Number of games per page
+
         # Total number of games in this genre
         total = self.game_service.get_genre_count(genre)
+
         # Track invalid attempts
         attempts = 0
         while True:
@@ -59,16 +61,20 @@ class GenreController:
                 break
             try:
                 start = page * page_size    # Calculate start index
+
                 # Fetch paginated results
                 result = self.game_service.get_game_by_genre(genre, page, page_size)
+
                 # Show page info
                 print(f"== {genre} (showing {start+1}-{start+page_size} of {total})")
                 if not result:  # If no games returned
                     print("No more games.")
                     if page > 0:
                         page -= 1   # Go back one page
+
                 for item in result:  # Display each game
                     print(f"- ID {item["game_id"]}: {item["title"]} by {item["designer"]} ${item["unit_price"]}")
+
                 print("Options: enter Game ID to add to cart, 'n' for next, ENTER to return")
                 choice = input(">")
                 if choice == "":

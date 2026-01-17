@@ -16,6 +16,7 @@ class InvoiceController:
     def start(self):
         # Retrieve the latest order
         order = self.order_service.get_order()
+
         if order:   # If an order exists
             print("="*50)
             print(f"Invoice for Order no. {order["order_no"]}")
@@ -30,16 +31,20 @@ class InvoiceController:
             # Print table header
             print(f"{"Game ID":<10} {"Title":<50} {"$":>6} {"Qty":>4} {"Total":>6}")
             print("-"*80)
+
             # Fetch order items
             items = self.order_service.get_order_items_by_order_id(order["order_no"])
+
             total = 0   # Initialize total order cost
             for item in items:  # Loop through order items
                 total += item["line_total"]  # Add each line total
                 print(f"{item["game_id"]:<10} {item["title"]:<50} {item["unit_price"]:>6} {item["quantity"]:>4} {item["line_total"]:>6}")
+
             print("-"*80)
             print()
             print(f"Total = ${total}\n")    # Display final total
             print("="*80)
+
             choice = input("Press Enter to return to the main menu")
             if choice == "":
                 # Go back to main menu

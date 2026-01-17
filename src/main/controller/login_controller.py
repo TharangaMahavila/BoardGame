@@ -96,6 +96,7 @@ class LoginController:
                 phone = input("Enter Phone (optional):")
                 email = input("Enter Email address:")
                 password = input("Enter Password:")
+
                 # Register new user
                 new_member = self.login_service.member_registration(
                     first_name,
@@ -107,6 +108,7 @@ class LoginController:
                     email,
                     password
                 )
+
                 if new_member:
                     print("\nRegistration successful, Please login from main menu")
                     break

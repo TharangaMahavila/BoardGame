@@ -17,11 +17,13 @@ class LoginService:
                 "email": email,
                 "password": password
                 }
+
             # Validate required fields
             for field, value in required_fields.items():
                 # Check if the field is empty or contains only spaces
                 if not value.strip():
                     raise ValueError(f"{field} is mandatory")
+
                 # Additional validation for email
                 if field == "email":
                     validate_email(value)   # Check email format
@@ -58,6 +60,7 @@ class LoginService:
 
         # Validate email format
         validate_email(email)
+
         # Retrieve the user record by email
         member = self.userRepo.get_member_by_email(email)
         if not member:
@@ -70,6 +73,7 @@ class LoginService:
 
         # Remove the password hash before returning the user object
         member.pop("pwd_hash", None)
+
         # Return the authenticated user data
         return member
 

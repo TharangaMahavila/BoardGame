@@ -26,20 +26,26 @@ class CartController:
 
         # Get all items currently in the cart
         items = self.cart_service.get_all_cart_items()
+
         if items:  # If cart is not empty
             print(f"{"Game ID":<10} {"Title":<50} {"$":>6} {"Qty":>4} {"Total":>6}")
             print("-"*80)
+
             total = 0  # Initialize total cart value
+
             for item in items:
                 # Calculate total price for this item
                 item_total = item["unit_price"] * item["quantity"]
                 # Add to cart total
                 total += item_total
                 print(f"{item["game_id"]:<10} {item["title"]:<50} {item["unit_price"]:>6} {item["quantity"]:>4} {item_total:>6}")
+
             print("-"*80)
             print()
             print(f"Total = ${total}\n")
+
             choice = input("Proceed to checkout (Y/N)? ")
+
             if choice.lower() == "y":   # If user chooses to checkout
                 # Save the order
                 self.order_service.save_order()

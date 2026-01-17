@@ -8,6 +8,7 @@ class CartService:
         # Quantity must be at least 1
         if qty < 1:
             raise ValueError("Invalid quantity")
+
         # Check whether the game exists in the database
         game = self.gameRepo.find_by_id(game_id)
         if not game:
